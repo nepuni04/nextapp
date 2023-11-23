@@ -206,6 +206,8 @@ export async function fetchCustomers() {
 export async function fetchFilteredCustomers(query: string) {
   noStore();
   
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
   try {
     const data = await sql<CustomersTable>`
 		SELECT
@@ -232,7 +234,8 @@ export async function fetchFilteredCustomers(query: string) {
     }));
 
     return customers;
-  } catch (err) {
+  } 
+  catch (err) {
     console.error('Database Error:', err);
     throw new Error('Failed to fetch customer table.');
   }
